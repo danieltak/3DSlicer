@@ -1,0 +1,21 @@
+<layout-row id="RowLayout1">
+  <layout-column id="ColumnLayout2" style="flex-basis:80%">
+		<sick-viewer3d id="Viewer3D1" protocol="auto" viewer-id="viewer3D">
+		</sick-viewer3d>
+  </layout-column>
+	<layout-column id="ColumnLayout1" style="flex-basis:20%">
+				<h1 id="Heading11">Parâmetros</h1>
+		<davinci-button id="Button1" type="primary" style="align-self:stretch">
+			<span>Rotina Inspeção</span>
+			<crown-binding event="submit" name="BlobFeatureTypes3D/StartButton" auto-commit></crown-binding>
+		</davinci-button>
+		<davinci-numeric-field id="NumericField1" type="outline" max="15" ticks="1" group-separator="," decimal-separator="." format-pattern="0" style="align-self:stretch" min="1">
+			<sopas-binding property="value" name="NumIMG" auto-update="1000" update-on-resume></sopas-binding>
+			<sopas-binding event="input" name="NumIMG" auto-commit></sopas-binding>
+		</davinci-numeric-field>
+		<h1 id="Heading12">Resultados</h1>
+		<davinci-value-display id="ValueDisplay1" label="Volume" unit="mm³" style="align-self:stretch">
+			<sopas-binding property="value" name="Volume" auto-update="1000" update-on-resume></sopas-binding>
+		</davinci-value-display>
+	</layout-column>
+</layout-row>

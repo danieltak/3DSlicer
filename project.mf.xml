@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<manifest>
+    <application name="BlobFeatureTypes3D">
+        <crown name="BlobFeatureTypes3D">
+            <desc>user script</desc>
+            <serves>
+                <function name="StartButton">
+                    <trait>released</trait>
+                </function>
+            </serves>
+        </crown>
+        <meta key="author">AppSpace Sample</meta>
+        <meta key="version">2.5.0</meta>
+        <meta key="priority">low</meta>
+        <meta key="copy-protected">false</meta>
+        <meta key="read-protected">false</meta>
+        <meta key="tags">InspectorP,SIM4000,Image,Algorithm,Filter,Analysis, 3D</meta>
+        <entry default="Main.lua" path="scripts"/>
+    </application>
+</manifest>

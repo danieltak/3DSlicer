@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\Docu\Parameter.cid.xsd">
+  <UserLevel/>
+  <IFD>
+    <CID>
+      <Block Name="BlobFeatureTypes3D">
+        <Group Name="Parametros">
+          <Variable Name="NumIMG" VirtualMemoryRef="ApplicationParameters">
+            <BasicType>
+              <Int DefaultValue="1"/>
+            </BasicType>
+          </Variable>
+          <Variable Name="Volume" VirtualMemoryRef="ApplicationParameters">
+            <BasicType Usage="Normal">
+              <LReal DefaultValue="0.0"/>
+            </BasicType>
+          </Variable>
+        </Group>
+      </Block>
+    </CID>
+  </IFD>
+  <Hardware>
+    <VirtualMemory Name="ApplicationParameters"/>
+  </Hardware>
+</Device>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2012 (http://www.altova.com) by zeihema (Bechtle GmbH) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="descriptor">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="units" type="unitsType" minOccurs="0"/>
+				<xs:element name="controls" type="controlsType" minOccurs="0"/>
+				<xs:element name="dialogs" type="dialogsType" minOccurs="0"/>
+				<xs:element name="wizards" type="wizardsType" minOccurs="0"/>
+				<xs:element name="controlGroups" type="controlGroupsType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="unitsType">
+		<xs:sequence>
+			<xs:element name="unit" type="unitType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="controlsType">
+		<xs:sequence>
+			<xs:element name="control" type="controlType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="wizardsType">
+		<xs:sequence>
+			<xs:element name="wizard">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="page" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="controls">
+										<xs:complexType>
+											<xs:choice>
+												<xs:element name="control" type="controlType" minOccurs="0" maxOccurs="unbounded"/>
+												<xs:element name="controlref" minOccurs="0" maxOccurs="unbounded">
+													<xs:complexType>
+														<xs:attribute name="name" type="xs:string" use="required"/>
+													</xs:complexType>
+												</xs:element>
+											</xs:choice>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="constraint" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="constraintType">
+													<xs:attribute name="nextPage" type="xs:string" use="required"/>
+												</xs:extension>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+								<xs:attribute name="name" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="name" type="xs:string" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="dialogsType">
+		<xs:sequence>
+			<xs:element name="dialog">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="input">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="controls">
+										<xs:complexType>
+											<xs:choice>
+												<xs:element name="control" type="controlType" minOccurs="0" maxOccurs="unbounded"/>
+												<xs:element name="controlref" minOccurs="0" maxOccurs="unbounded">
+													<xs:complexType>
+														<xs:attribute name="name" type="xs:string" use="required"/>
+													</xs:complexType>
+												</xs:element>
+											</xs:choice>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+								<xs:attribute name="method"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="output" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="controls">
+										<xs:complexType>
+											<xs:choice>
+												<xs:element name="control" type="controlType" minOccurs="0" maxOccurs="unbounded"/>
+												<xs:element name="controlref" minOccurs="0" maxOccurs="unbounded">
+													<xs:complexType>
+														<xs:attribute name="name" type="xs:string" use="required"/>
+													</xs:complexType>
+												</xs:element>
+											</xs:choice>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="name" type="xs:string" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="unitType">
+		<xs:sequence>
+			<xs:element name="si" type="unitDefinitionType"/>
+			<xs:element name="imperial" type="unitDefinitionType"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="unitDefinitionType">
+		<xs:attribute name="factor" type="xs:float" use="required"/>
+		<xs:attribute name="format" type="xs:string" use="required"/>
+		<xs:attribute name="unit" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="controlType">
+		<xs:sequence>
+			<xs:element name="viewControl" type="viewEditControlType" minOccurs="0"/>
+			<xs:element name="editControl" type="viewEditControlType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="readOnly" type="xs:boolean" use="optional" default="false"/>
+	</xs:complexType>
+	<xs:complexType name="viewEditControlType">
+		<xs:sequence>
+			<xs:element name="options" type="xs:string" minOccurs="0"/>
+			<xs:element name="bindings" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence maxOccurs="unbounded">
+						<xs:element name="binding">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="init" type="xs:string" minOccurs="0"/>
+									<xs:element name="options" type="xs:string" minOccurs="0"/>
+								</xs:sequence>
+								<xs:attribute name="topic" type="xs:string" use="required"/>
+								<xs:attribute name="path" use="optional"/>
+								<xs:attribute name="direction" use="optional" default="bidirectional">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:enumeration value="get"/>
+											<xs:enumeration value="set"/>
+											<xs:enumeration value="bidirectional"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:attribute>
+								<xs:attribute name="property" type="xs:string" use="required"/>
+								<xs:attribute name="autoUpdate" type="xs:int"/>
+								<xs:attribute name="preSet" type="xs:string"/>
+								<xs:attribute name="postGet" type="xs:string"/>
+								<xs:attribute name="autoCommit" type="xs:boolean" default="false"/>
+								<xs:attribute name="updateOnResume" type="xs:boolean" default="false"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="control" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="constraintType">
+		<xs:attribute name="ref" type="xs:string" use="required"/>
+		<xs:attribute name="match" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="eq"/>
+					<xs:enumeration value="lt"/>
+					<xs:enumeration value="gt"/>
+					<xs:enumeration value="ge"/>
+					<xs:enumeration value="le"/>
+					<xs:enumeration value="not"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="value" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="controlGroupsType">
+		<xs:sequence>
+			<xs:element name="controlGroup" type="controlGroupType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="controlGroupType">
+		<xs:choice>
+			<xs:element name="control" type="controlType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="controlref" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:attribute name="name" type="xs:string" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+</xs:schema>

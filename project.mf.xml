@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <manifest>
-    <application name="BlobFeatureTypes3D">
-        <crown name="BlobFeatureTypes3D">
+    <application name="Slicer_v0">
+        <crown name="Slicer_v0">
             <desc>user script</desc>
             <serves>
                 <function name="StartButton">
@@ -9,8 +9,8 @@
                 </function>
             </serves>
         </crown>
-        <meta key="author">AppSpace Sample</meta>
-        <meta key="version">2.5.0</meta>
+        <meta key="author">Similar</meta>
+        <meta key="version">1.0</meta>
         <meta key="priority">low</meta>
         <meta key="copy-protected">false</meta>
         <meta key="read-protected">false</meta>

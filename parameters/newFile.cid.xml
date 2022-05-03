@@ -3,7 +3,7 @@
   <UserLevel/>
   <IFD>
     <CID>
-      <Block Name="BlobFeatureTypes3D">
+      <Block Name="Slicer_v0">
         <Group Name="Parametros">
           <Variable Name="NumIMG" VirtualMemoryRef="ApplicationParameters">
             <BasicType>

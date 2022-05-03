@@ -26,12 +26,12 @@
 local helpers = require('Helpers')
 
 -- Loading featureType functions, see BlobFeatureTypes3D.lua
-local types = require('BlobFeatureTypes3D')
+local Blob3D = require('BlobFeatureTypes3D')
 
 --Start of Global Scope---------------------------------------------------------
 print('AppEngine Version: ' .. Engine.getVersion())
 
-local DELAY = 1000 -- ms between each type for demonstration purpose
+local DELAY = 500 -- ms between each type for demonstration purpose
 
 --End of Global Scope-----------------------------------------------------------
 
@@ -49,28 +49,51 @@ function RotinaImagem()
   local plane = helpers.getReferencePlane(heightMap, nil)
 
   -- Blob inspections---------------------------
-  types.area(heightMap, intensityMap, plane)
-  Script.sleep(DELAY) -- for demonstration purpose only
-  types.centroid(heightMap, intensityMap, plane)
-  Script.sleep(DELAY) -- for demonstration purpose only
-  types.elongation(heightMap, intensityMap, plane)
-  Script.sleep(DELAY) -- for demonstration purpose only
-  types.convexity(heightMap, intensityMap, plane)
-  Script.sleep(DELAY) -- for demonstration purpose only
-  types.compactness(heightMap, intensityMap, plane)
-  Script.sleep(DELAY) -- for demonstration purpose only
-  types.perimeterLength(heightMap, intensityMap, plane)
-  Script.sleep(DELAY) -- for demonstration purpose only
-  types.convexHull(heightMap, intensityMap, plane)
-  Script.sleep(DELAY) -- for demonstration purpose only
-  types.countHoles(heightMap, intensityMap, plane)
-  Script.sleep(DELAY) -- for demonstration purpose only
-  types.orientation(heightMap, intensityMap, plane)
-  Script.sleep(DELAY) -- for demonstration purpose only
+  -- print('Imagem número: ' .. NumIMG)
+  -- Script.sleep(DELAY) -- for demonstration purpose only
+  -- print('==== ÁREA ====')
+  -- Blob3D.area(heightMap, intensityMap, plane)
+  -- Script.sleep(DELAY) -- for demonstration purpose only
+  -- print('==== Centroid ====')
+  -- Blob3D.centroid(heightMap, intensityMap, plane)
+  -- Script.sleep(DELAY) -- for demonstration purpose only
+  -- print('==== Elongation ====')
+  -- Blob3D.elongation(heightMap, intensityMap, plane)
+  -- Script.sleep(DELAY) -- for demonstration purpose only
+  -- print('==== Convexity ====')
+  -- Blob3D.convexity(heightMap, intensityMap, plane)
+  -- Script.sleep(DELAY) -- for demonstration purpose only
+  -- print('==== Compactness ====')
+  -- Blob3D.compactness(heightMap, intensityMap, plane)
+  -- Script.sleep(DELAY) -- for demonstration purpose only
+  -- print('==== Perimeter ====')
+  -- Blob3D.perimeterLength(heightMap, intensityMap, plane)
+  -- Script.sleep(DELAY) -- for demonstration purpose only
+  -- print('==== Count Holes ====')
+  -- Blob3D.countHoles(heightMap, intensityMap, plane)
+  -- Script.sleep(DELAY) -- for demonstration purpose only
+  -- print('==== Orientation ====')
+  -- Blob3D.orientation(heightMap, intensityMap, plane)
+  -- Script.sleep(DELAY) -- for demonstration purpose only
+
+
+
+  local scanLength = 4 -- Scan length constant
+  local imgWidth, imgHeight = Image.getSize(heightMap)
+  local targetVolume = 100000
+  
+  --Verify if scanLength will scan the entire image
+  while Blob3D.verifyScanLength(imgWidth, scanLength) == false do
+    scanLength = scanLength - 1
+  end
+
+  local target = Blob3D.slicerCoord(targetVolume, heightMap, intensityMap, plane, scanLength)
+  print(target)
+  Parameters.set("Target", target)
 
   Parameters.set("Volume", volume)
   
   print('App finished.')
 end
 -- Registra função de inicio da rotina
-Script.serveFunction("BlobFeatureTypes3D.StartButton","RotinaImagem")
+Script.serveFunction("Slicer_v0.StartButton", "RotinaImagem")

@@ -14,6 +14,9 @@ View.PixelRegionDecoration.setColor(decRectangles, 250, 0, 0, 150) -- RGBA value
 local regionDecoration = View.PixelRegionDecoration.create()
 regionDecoration:setColor(0, 255, 0, 150) -- Green with transparency
 
+local regionDecorationRed = View.PixelRegionDecoration.create()
+regionDecorationRed:setColor(255, 0, 0, 50) -- Red with low transparency
+
 local borderDecoration = View.PixelRegionDecoration.create()
 borderDecoration:setColor(255, 0, 0) -- Red
 
@@ -34,6 +37,12 @@ local pointDecoration3D = View.ShapeDecoration.create()
 pointDecoration3D:setLineColor(0, 230, 0) -- Green
 pointDecoration3D:setPointSize(10)
 pointDecoration3D:setPointType('DOT')
+
+local planeDecoRed = View.ShapeDecoration.create()
+planeDecoRed:setLineColor(250, 0, 0)
+planeDecoRed:setFillColor(250, 0, 0, 10)
+planeDecoRed:setLineWidth(2)
+
 
 local planeDeco = View.ShapeDecoration.create()
 planeDeco:setLineColor(0, 0, 240)
@@ -85,12 +94,14 @@ helper.viewer2D = viewer2D
 helper.imgDecoration = imgDecoration
 helper.decRectangles = decRectangles
 helper.regionDecoration = regionDecoration
+helper.regionDecorationRed = regionDecorationRed
 helper.borderDecoration = borderDecoration
 helper.lineDecoration2D = lineDecoration2D
 helper.lineDecoration3D = lineDecoration3D
 helper.pointDecoration2D = pointDecoration2D
 helper.pointDecoration3D = pointDecoration3D
 helper.planeDeco = planeDeco
+helper.planeDecoRed = planeDecoRed
 helper.featureText = featureText
 helper.getReferencePlane = getReferencePlane
 helper.findSlopeRegion = findSlopeRegion
